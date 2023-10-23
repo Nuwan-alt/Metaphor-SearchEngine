@@ -1,0 +1,80 @@
+{
+    "settings" : {
+        "index" : {
+            "analysis" : {
+              "analyzer" : {
+                  "plain" : {
+                    "filter" : [],
+                    "tokenizer" : "standard"
+                  },
+                  "plain_with_synonyms": {
+                    "filter" : ["sinhala_synonyms_filter"],
+                    "tokenizer" : "standard"
+                  }
+              },
+
+              "filter": {
+                "sinhala_synonyms_filter": {
+                  "type": "synonym",
+                  "synonyms": [
+                    "ඔබ,ඔයා,නුඹ",
+                    "සඳ,පුන්සඳ",
+                    "රත්තරන්,රන්,රත්තරං",
+                    "මව,අම්මා",
+                    "ආහාර,අහර",
+                    "සිත,හද",
+                    "ගඟ,ගඟුල,නදිය,ගඟේ",
+                    "දිවි, ජීවන,ජීවිතේ",
+                    "අරුණ,",
+                    "සිප්,සිල්ප",
+                    "වරුසාව,වැස්සේ",
+                    "නුඹ,ඇය,ඔබ"
+                  ]
+                }
+              }
+          }
+        }
+    },
+
+    "mappings": {
+      "dynamic": "strict",
+      "properties": {
+          "Lyrics": {
+            "type": "text",
+            "analyzer": "plain"
+          },
+          "Lyricist": {
+            "type": "text",
+            "analyzer": "plain"
+          },
+          "Year": {
+            "type": "date",
+            "format": "yyyy"
+          },
+
+          "Metaphor": {
+            "type": "text",
+            "analyzer": "plain"
+          },
+          "Source": {
+            "type": "text",
+            "analyzer": "plain"
+          },
+          "Target": {
+            "type": "text",
+            "analyzer": "plain"
+          },
+          "Meaning": {
+            "type": "text",
+            "analyzer": "plain"
+          },
+          "Resourse": {
+            "type": "text",
+            "analyzer": "plain"
+          },
+          "Gender": {
+            "type":  "keyword"
+          }
+      }
+    }
+}

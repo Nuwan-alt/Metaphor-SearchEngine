@@ -25,7 +25,6 @@
                     "සිත,හද",
                     "ගඟ,ගඟුල,නදිය,ගඟේ",
                     "දිවි, ජීවන,ජීවිතේ",
-                    "අරුණ,",
                     "සිප්,සිල්ප",
                     "වරුසාව,වැස්සේ",
                     "නුඹ,ඇය,ඔබ"
@@ -58,11 +57,11 @@
           },
           "Source": {
             "type": "text",
-            "analyzer": "plain"
+            "analyzer": "plain_with_synonyms"
           },
           "Target": {
             "type": "text",
-            "analyzer": "plain"
+            "analyzer": "plain_with_synonyms"
           },
           "Meaning": {
             "type": "text",

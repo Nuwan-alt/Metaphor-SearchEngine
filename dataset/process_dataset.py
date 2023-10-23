@@ -11,8 +11,6 @@ import json
 
 def main():
     json_file_path = "data.json"
-    print("==================================")
-
     with open(json_file_path, 'r', encoding='utf-8') as json_file:
         metaphor_documents = json.load(json_file)
 

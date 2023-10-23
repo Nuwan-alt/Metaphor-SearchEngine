@@ -1,5 +1,5 @@
 from search import multi_search
-# from ui import get_search_results_table
+from ui import get_search_results_table
 
 
 def take_inputs():
@@ -24,6 +24,8 @@ def transform_results(results):
             doc['Target'],
             doc['Meaning'],
             doc['Gender'],
+            doc['Resourse'],
+
         ]
         table_rows.append(tuple(row))
 
@@ -43,8 +45,8 @@ def main():
 
         total_matches, table_rows = transform_results(results)
         print('Total Matches -', total_matches)
-        # results_table = get_search_results_table(table_rows)
-        # results_table.mainloop()
+        results_table = get_search_results_table(table_rows)
+        results_table.mainloop()
 
 
 main()

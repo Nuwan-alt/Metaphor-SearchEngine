@@ -53,3 +53,11 @@ def search(query, size=100):
     if res['timed_out']:
         raise RuntimeError('Search request timed out.')
     return res['hits']
+
+def agg_search(search_request):
+    client = get_client()
+    c = elasticsearch_config()
+    result = client.search(index=c['index_name'], body=search_request)
+    aggregation_results = result['aggregations']['product']['buckets']
+
+    return aggregation_results

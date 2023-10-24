@@ -42,11 +42,12 @@ def main():
             break
 
         results = multi_search(search_term, mode)
+        if mode !=8:
 
-        total_matches, table_rows = transform_results(results)
-        print('Total Matches -', total_matches)
-        results_table = get_search_results_table(table_rows)
-        results_table.mainloop()
+            total_matches, table_rows = transform_results(results)
+            print('Total Matches -', total_matches)
+            results_table = get_search_results_table(table_rows)
+            results_table.mainloop()
 
 
 main()

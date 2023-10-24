@@ -33,6 +33,15 @@ def transform_results(results):
 
 
 def main():
+    file_path = 'welcome.txt'  # Replace with the path to your file
+    try:
+        with open(file_path, 'r') as file:
+            file_contents = file.read()
+            print(file_contents)
+    except FileNotFoundError:
+        print(f"File '{file_path}' not found.")
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
     modes_text = open('search_modes.txt', 'r').read()
 
     while True:
@@ -42,10 +51,9 @@ def main():
             break
 
         results = multi_search(search_term, mode)
-        if mode !=8:
-
+        if mode != 10 and mode != 11:
             total_matches, table_rows = transform_results(results)
-            print('Total Matches -', total_matches)
+            print(' **************** Total Matches - ' + str(total_matches) + ' ****************')
             results_table = get_search_results_table(table_rows)
             results_table.mainloop()
 

@@ -61,3 +61,11 @@ def agg_search(search_request):
     aggregation_results = result['aggregations']['product']['buckets']
 
     return aggregation_results
+
+def agg_year_bucket(query):
+    client = get_client()
+    c = elasticsearch_config()
+    result = client.search(index=c['index_name'], body=query)
+    return result['aggregations']['rating_ranges']['buckets']
+
+

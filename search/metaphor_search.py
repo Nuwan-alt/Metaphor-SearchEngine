@@ -1,4 +1,4 @@
-from dataset import search, tokenize_text, agg_search
+from dataset import search, tokenize_text, agg_search, agg_year_bucket
 
 
 def get_all():
@@ -10,7 +10,7 @@ def get_all():
 
 def search_by_lyrics(search_term):
     query = {
-        'match': {
+        'match_phrase': {
             'Lyrics': search_term
         }
     }
@@ -81,7 +81,26 @@ def search_by_date_range(start, end):
     }
     return search(query)
 
-def filter_to_maps():
+
+def search_by_year(search_term):
+    query = {
+        'match': {
+            'Year': search_term
+        }
+    }
+    return search(query)
+
+
+def search_by_resource(search_term):
+    query = {
+        'match_phrase': {
+            'Resourse': search_term
+        }
+    }
+    return search(query)
+
+
+def map_to_gender():
     aggs_query = {
         "product": {
             "terms": {"field": "Gender"}
@@ -95,21 +114,39 @@ def filter_to_maps():
     return agg_search(search_request)
 
 
-def bucket_search(search_term):
-    data = filter_to_maps()
+def bucket_search_gender():
+    data = map_to_gender()
     max_key_length = max(len(item['key']) for item in data)
-
-    # Print the formatted values
     for item in data:
-        print(f"{item['key']} : {item['doc_count']:{max_key_length}}")
-
+        print(f" ********** {item['key']} : {item['doc_count']:{max_key_length}} **********")
     return
 
+
+def map_to_year_ranges(lower, upper):
+    query = {
+        "aggs": {
+            "rating_ranges": {
+                "range": {
+                    "field": "Year",
+                    "ranges": [
+                        {"to": lower},
+                        {"from": lower, "to": upper},
+                        {"from": upper}
+                    ]
+                }
+            }
+        }
+    }
+    return query
+
+
+def bucket_search_year(lower, upper):
+    for bucket in agg_year_bucket(map_to_year_ranges(lower, upper)):
+        print(f"********** {bucket['key']} : {bucket['doc_count']} **********")
 
 
 def multi_search(search_term: str, mode: int):
     if mode == 0:
-
         return get_all()
     elif mode == 1:
         return search_by_lyrics(search_term)
@@ -122,12 +159,18 @@ def multi_search(search_term: str, mode: int):
     elif mode == 5:
         return search_by_target(search_term)
     elif mode == 6:
-        return search_by_any(search_term)
+        return search_by_year(search_term)
     elif mode == 7:
+        return search_by_resource(search_term)
+    elif mode == 8:
+        return search_by_any(search_term)
+    elif mode == 9:
         lst = search_term.split("-")
         return search_by_date_range(lst[0], lst[1])
-    elif mode == 8:
-        bucket_search(search_term)
+    elif mode == 10:
+        bucket_search_gender()
+    elif mode == 11:
+        lst = search_term.split("-")
+        bucket_search_year(lst[0], lst[1])
     else:
         raise RuntimeError('Invalid search mode')
-

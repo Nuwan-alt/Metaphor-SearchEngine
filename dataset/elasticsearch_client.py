@@ -3,9 +3,9 @@ from elasticsearch import Elasticsearch, helpers
 
 def elasticsearch_config():
     return {
-        'host': 'CS-4642:YXAtc291dGhlYXN0LTEuYXdzLmZvdW5kLmlvJGZkODg5MWQzZWQxYzRjMmZhYzMyZWRhMDhhNmJlMWE3JDA3NDA1OTNmZmJiMDRhMjQ4ZjRhYzBlOGMxYmMwNWNk',
-        'username': 'elastic',
-        'password': 'xbqraUMgQGj8lYoaqL61Mz5P',
+        'host': '',
+        'username': '',
+        'password': '',
         'index_name': 'metaphors'
     }
 

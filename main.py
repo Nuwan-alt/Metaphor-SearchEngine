@@ -4,7 +4,11 @@ from ui import get_search_results_table
 
 def take_inputs():
     mode = int(input('Enter search mode: '))
-    search_term = input('Enter search query: ')
+
+    if(mode == 0 or mode ==10):
+        search_term = "kk"
+    else:
+        search_term = input('Enter search query: ')
 
     return mode, search_term
 
